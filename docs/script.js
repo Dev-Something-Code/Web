@@ -70,5 +70,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     scrollElements.forEach(el => observer.observe(el));
 
-  }, 50); // 50ms待つ
+  }, 100); // 50ms待つ
 });
+
