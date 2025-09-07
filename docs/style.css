@@ -125,5 +125,4 @@ footer {
 .skills img {
   display: block; /* inline-blockでも可 */
   margin: 0; /* flexで中央寄せするので不要 */
-
 }
