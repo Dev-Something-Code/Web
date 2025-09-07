@@ -1,10 +1,6 @@
-window.addEventListener('DOMContentLoaded', () => {
-  // ページロード直後に50ms待ってから処理開始
+window.addEventListener('DOMContentLoaded', () => {  
   setTimeout(() => {
     window.scrollTo(0, 0);
-  }, 150);
-  
-  setTimeout(() => {
     const elements = document.querySelectorAll('.hidden');
     const scrollElements = [];
 
@@ -72,6 +68,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     scrollElements.forEach(el => observer.observe(el));
 
-  }, 150);
+  }, 200);
 });
+
 
