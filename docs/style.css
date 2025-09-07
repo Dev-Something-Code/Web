@@ -1,0 +1,103 @@
+:root {
+  --c1: #07090a;
+  --c2: #0e1b1f;
+  --c3: #10343b;
+  --c4: #1e656d;
+  --txt: #e6f6f8;
+  --glass: #ffffff10;
+  --glass-border: #ffffff22;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
+  color: var(--txt);
+  background: #000;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ====== テキスト ====== */
+h1, p, img {
+  text-align: center;
+  font-family: 'Audiowide', cursive;
+}
+
+p {
+  margin-bottom: 50px;
+}
+
+h2 {
+  text-align: left;
+  font-family: 'Audiowide', cursive;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+/* ====== 背景（中央に緑光・固定） ====== */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: 
+    radial-gradient(800px 800px at 50% 50%, var(--c4) 0%, transparent 70%), /* 真ん中に緑の光 */
+    radial-gradient(1000px 1000px at 50% 50%, var(--c3) 0%, transparent 80%),
+    linear-gradient(180deg, var(--c1) 0%, #000 70%, #000 100%);
+  background-repeat: no-repeat;
+  filter: saturate(1.05);
+}
+
+/* ====== 周辺を締めるビネット ====== */
+.vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: 
+    inset 0 0 200px 80px #000000bb, 
+    inset 0 0 600px 200px #00000066;
+}
+
+/* ====== スクロールアニメーション ====== */
+.hidden {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ====== ヘッダー ====== */
+header {
+  width: 100%;                 /* 横いっぱいに広げる */
+  padding: 1px 0;                  /* 高さを抑える */
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* 下だけ境界線 */
+  backdrop-filter: blur(12px) saturate(120%);
+  font-size: 14px;
+}
+
+/* ====== フッター ====== */
+footer {
+  font-family: 'Audiowide', cursive;
+  background-color: #222;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* 下だけ境界線 */
+  backdrop-filter: blur(12px) saturate(120%);
+}
