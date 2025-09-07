@@ -1,41 +1,74 @@
 window.addEventListener('DOMContentLoaded', () => {
-    // ページロード直後に少し遅延させてトップにスクロール
-    setTimeout(() => window.scrollTo(0, 0), 50);
+  // ページロード直後に50ms待ってから処理開始
+  setTimeout(() => {
+    window.scrollTo(0, 0);
 
     const elements = document.querySelectorAll('.hidden');
+    const scrollElements = [];
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-                const imgs = el.querySelectorAll('img');
-                
-                if (imgs.length > 0) {
-                    let loadedCount = 0;
-                    imgs.forEach(img => {
-                        if (img.complete) {
-                            loadedCount++;
-                            if (loadedCount === imgs.length) {
-                                el.classList.add('show');
-                                observer.unobserve(el);
-                            }
-                        } else {
-                            img.addEventListener('load', () => {
-                                loadedCount++;
-                                if (loadedCount === imgs.length) {
-                                    el.classList.add('show');
-                                    observer.unobserve(el);
-                                }
-                            });
-                        }
-                    });
-                } else {
-                    el.classList.add('show');
-                    observer.unobserve(el);
-                }
+    // 最初に見えている要素だけ delay をつけて順番に表示
+    let initialIndex = 0;
+    elements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        const delay = initialIndex * 0.2;
+        initialIndex++;
+        const imgs = el.querySelectorAll('img');
+        const showElement = () => el.classList.add('show');
+
+        if (imgs.length > 0) {
+          let loadedCount = 0;
+          imgs.forEach(img => {
+            if (img.complete) {
+              loadedCount++;
+              if (loadedCount === imgs.length) setTimeout(showElement, delay * 1000);
+            } else {
+              img.addEventListener('load', () => {
+                loadedCount++;
+                if (loadedCount === imgs.length) setTimeout(showElement, delay * 1000);
+              });
             }
-        });
+          });
+        } else {
+          setTimeout(showElement, delay * 1000);
+        }
+      } else {
+        scrollElements.push(el);
+      }
+    });
+
+    // スクロールで出てくる要素
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const imgs = el.querySelectorAll('img');
+          const showNow = () => {
+            el.classList.add('show');
+            obs.unobserve(el);
+          };
+
+          if (imgs.length > 0) {
+            let loadedCount = 0;
+            imgs.forEach(img => {
+              if (img.complete) {
+                loadedCount++;
+                if (loadedCount === imgs.length) showNow();
+              } else {
+                img.addEventListener('load', () => {
+                  loadedCount++;
+                  if (loadedCount === imgs.length) showNow();
+                });
+              }
+            });
+          } else {
+            showNow();
+          }
+        }
+      });
     }, { threshold: 0.1 });
 
-    elements.forEach(el => observer.observe(el));
+    scrollElements.forEach(el => observer.observe(el));
+
+  }, 50); // 50ms待つ
 });
