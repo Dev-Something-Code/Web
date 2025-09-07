@@ -102,15 +102,6 @@ footer {
   backdrop-filter: blur(12px) saturate(120%);
 }
 
-img { 
-  display: flex;             /* 横並びにする */
-  justify-content: center; 
-  max-width: 100%; /* 親要素の幅を超えない */ 
-  height: auto; /* 高さは自動調整 */ 
-  display: block; /* 中央寄せを簡単にする */ 
-  margin: 0 auto; /* 横中央に配置 */ 
-}
-
 .socials {
   display: flex;
   justify-content: center; /* 中央寄せ */
@@ -134,4 +125,5 @@ img {
 .skills img {
   display: block; /* inline-blockでも可 */
   margin: 0; /* flexで中央寄せするので不要 */
+
 }
