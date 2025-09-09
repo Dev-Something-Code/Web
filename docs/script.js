@@ -68,7 +68,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     scrollElements.forEach(el => observer.observe(el));
 
-  }, 200);
+  }, 1000);
 });
+
 
 
