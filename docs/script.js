@@ -1,3 +1,6 @@
+// 最初に下に下がるの直るかな…
+widow.scrollTo(0,0)
+
 window.addEventListener('DOMContentLoaded', () => {  
   setTimeout(() => {
     window.scrollTo(0, 0);
@@ -70,6 +73,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   }, 1000);
 });
+
 
 
 
