@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {  
+window.addEventListener('load', () => {  
   setTimeout(() => {
     window.scrollTo(0, 0);
     const elements = document.querySelectorAll('.hidden');
@@ -68,5 +68,5 @@ window.addEventListener('DOMContentLoaded', () => {
 
     scrollElements.forEach(el => observer.observe(el));
 
-  }, 1000);
+  }, 100);
 });
